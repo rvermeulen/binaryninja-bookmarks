@@ -22,7 +22,7 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 '''
 from collections import OrderedDict
-import pickle
+import json
 import os
 
 import binaryninja as bn
@@ -83,7 +83,7 @@ def load_bookmarks(view):
     try:
         with open(filename, 'r') as bookmarks_file:
             view.file.session_data['bookmarks'].update(
-                pickle.load(bookmarks_file)
+                json.load(bookmarks_file)
             )
     except ValueError:
         bn.show_message_box(
@@ -105,7 +105,7 @@ def save_bookmarks(view):
 
     try:
         with open(filename, 'w') as bookmarks_file:
-            pickle.dump(
+            json.dump(
                 view.file.session_data['bookmarks'],
                 bookmarks_file
             )
